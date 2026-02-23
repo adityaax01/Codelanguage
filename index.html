@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neon Code Lab</title>
+  <style>
+    :root {
+      --bg: #020b14;
+      --panel: #041726;
+      --neon: #00e5ff;
+      --text: #cfefff;
+      --muted: #5fa8c4;
+    }
+    * { box-sizing: border-box; font-family: 'Segoe UI', system-ui; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, #041726, #020b14 70%);
+      color: var(--text);
+    }
+    header {
+      padding: 16px;
+      text-align: center;
+      border-bottom: 1px solid rgba(0,229,255,.2);
+    }
+    header h1 {
+      margin: 0;
+      color: var(--neon);
+      letter-spacing: 1px;
+    }
+    main { padding: 16px; }
+    .card {
+      background: linear-gradient(180deg, #061f33, #03121e);
+      border: 1px solid rgba(0,229,255,.2);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 0 20px rgba(0,229,255,.08);
+    }
+    .card h2 {
+      margin-top: 0;
+      color: var(--neon);
+      font-size: 18px;
+    }
+    textarea, input {
+      width: 100%;
+      background: #020b14;
+      border: 1px solid rgba(0,229,255,.3);
+      border-radius: 8px;
+      color: var(--text);
+      padding: 10px;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px;
+      background: linear-gradient(90deg, #00e5ff, #00b8ff);
+      border: none;
+      border-radius: 8px;
+      color: #001018;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:active { transform: scale(.98); }
+    .hint {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NEON CODE LAB</h1>
+    <div class="hint">Create • Encode • Decode • Learn</div>
+  </header>  <main>
+    <div class="card">
+      <h2>1️⃣ Create Your Code Language</h2>
+      <input id="key" placeholder="Enter secret key (example: CYBER)" />
+      <div class="hint">This key converts normal words into code</div>
+    </div><div class="card">
+  <h2>2️⃣ Encode Text</h2>
+  <textarea id="plain" rows="3" placeholder="Enter normal text"></textarea>
+  <button onclick="encode()">ENCODE</button>
+  <textarea id="encoded" rows="3" placeholder="Encoded output"></textarea>
+</div>
+
+<div class="card">
+  <h2>3️⃣ Decode Text</h2>
+  <textarea id="cipher" rows="3" placeholder="Enter coded text"></textarea>
+  <button onclick="decode()">DECODE</button>
+  <textarea id="decoded" rows="3" placeholder="Decoded output"></textarea>
+</div>
+
+<div class="card">
+  <h2>4️⃣ Learn How It Works</h2>
+  <div class="hint">
+    • Each letter is shifted using your secret key<br />
+    • Same key = Encode & Decode<br />
+    • This is the base of cryptography & coding logic
+  </div>
+</div>
+
+  </main>  <footer>
+    Neon Blue • Mobile Friendly • Premium Simple UI
+  </footer>  <script>
+    function encode() {
+      const text = document.getElementById('plain').value;
+      const key = document.getElementById('key').value || 'A';
+      let result = '';
+      for (let i = 0; i < text.length; i++) {
+        const k = key.charCodeAt(i % key.length);
+        result += String.fromCharCode(text.charCodeAt(i) + (k % 5));
+      }
+      document.getElementById('encoded').value = result;
+    }
+
+    function decode() {
+      const text = document.getElementById('cipher').value;
+      const key = document.getElementById('key').value || 'A';
+      let result = '';
+      for (let i = 0; i < text.length; i++) {
+        const k = key.charCodeAt(i % key.length);
+        result += String.fromCharCode(text.charCodeAt(i) - (k % 5));
+      }
+      document.getElementById('decoded').value = result;
+    }
+  </script></body>
+</html>
